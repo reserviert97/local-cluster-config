@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-prime-service
+spec:
+  type: ClusterIP
+  selector:
+    app: mongodb-prime
+  ports:
+  - port: 27017
+    targetPort: 27017
