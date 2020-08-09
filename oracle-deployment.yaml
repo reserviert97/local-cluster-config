@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oracle-deployment
+spec:
+  selector:
+    matchLabels:
+      app: oracle
+  template:
+    metadata:
+      labels:
+        app: oracle
+    spec:
+      volumes:
+        - name: oracle-storage
+          persistentVolumeClaim:
+            claimName: oracle-pvc
+      containers:
+        - name: oracle
+          image: epiclabs/docker-oracle-xe-11g
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 1521
+          volumeMounts:
+            - mountPath: /u01/app/oracle
+              name: oracle-storage
+          env:
+            - name: ORACLE_ALLOW_REMOTE
+              value: "true"

@@ -14,7 +14,7 @@ spec:
       volumes:
         - name: mongodb-storage
           persistentVolumeClaim:
-            claimName: database-persistent-volume-claim
+            claimName: mongodb-pvc
       containers:
         - name: mongodb-prime
           image: mongo
